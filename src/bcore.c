@@ -1,3 +1,4 @@
+#include <X11/Xlib.h>
 #include <stdio.h>
 
 #include "blib.h"
@@ -137,11 +138,10 @@ bool WindowShouldClose() {
 // Drawing-related functions
 void ClearBackground(Color color) {
   if (gameWindow.gc != NULL) {
-    XGCValues vals;
-    vals.background =
+    unsigned long bgColor =
         (color.r << 24) + (color.g << 16) + (color.b << 8) + color.a;
 
-    XSetBackground(gameWindow.display, gameWindow.gc, 1L << 3);
+    XSetBackground(gameWindow.display, gameWindow.gc, bgColor);
   }
 }
 
